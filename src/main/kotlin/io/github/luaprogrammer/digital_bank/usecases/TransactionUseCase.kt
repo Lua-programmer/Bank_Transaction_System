@@ -1,7 +1,9 @@
 package io.github.luaprogrammer.digital_bank.usecases
 
+import io.github.luaprogrammer.digital_bank.ports.exceptions.InsufficientBalanceException
 import io.github.luaprogrammer.digital_bank.ports.input.TransactionInputPort
 import io.github.luaprogrammer.digital_bank.ports.output.AccountOutputPort
+import io.github.luaprogrammer.digital_bank.usecases.domain.Account
 import jakarta.transaction.Transactional
 import org.springframework.stereotype.Service
 
@@ -15,9 +17,9 @@ class TransactionUseCase(
         amount: String,
         accountNumber: String
     ) {
-        val account = accountOutputPort.getAccount(accountNumber)
-        accountOutputPort.createAndSaveAccount(
-            account.copy(
+        val account = validatedAccount(accountNumber)
+        accountOutputPort.saveAccount(
+            account!!.copy(
                 balance = account.balance.add(amount.toBigDecimal())
             )
         )
@@ -28,11 +30,11 @@ class TransactionUseCase(
         amount: String,
         accountNumber: String
     ) {
-        val account = accountOutputPort.getAccount(accountNumber)
-        if (account.balance < amount.toBigDecimal()) {
-            throw Exception("Saldo insuficiente")
+        val account = validatedAccount(accountNumber)
+        if (account?.balance!! < amount.toBigDecimal()) {
+            throw InsufficientBalanceException("Saldo Insuficiente")
         }
-        accountOutputPort.createAndSaveAccount(
+        accountOutputPort.saveAccount(
             account.copy(
                 balance = account.balance.subtract(amount.toBigDecimal())
             )
@@ -49,4 +51,7 @@ class TransactionUseCase(
             deposit(this, accountDestination)
         }
     }
+
+    private fun validatedAccount(accountNumber: String): Account? =
+        accountOutputPort.getAccount(accountNumber)
 }
