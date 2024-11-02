@@ -18,11 +18,14 @@ class TransactionUseCase(
         accountNumber: String
     ) {
         val account = validatedAccount(accountNumber)
-        accountOutputPort.saveAccount(
-            account!!.copy(
-                balance = account.balance.add(amount.toBigDecimal())
+
+        synchronized(account) {
+            accountOutputPort.saveAccount(
+                account.copy(
+                    balance = account.balance.add(amount.toBigDecimal())
+                )
             )
-        )
+        }
     }
 
     @Transactional
@@ -31,14 +34,17 @@ class TransactionUseCase(
         accountNumber: String
     ) {
         val account = validatedAccount(accountNumber)
-        if (account?.balance!! < amount.toBigDecimal()) {
-            throw InsufficientBalanceException("Saldo Insuficiente")
-        }
-        accountOutputPort.saveAccount(
-            account.copy(
-                balance = account.balance.subtract(amount.toBigDecimal())
+        synchronized(account) {
+
+            if (account.balance < amount.toBigDecimal()) {
+                throw InsufficientBalanceException("Saldo Insuficiente")
+            }
+            accountOutputPort.saveAccount(
+                account.copy(
+                    balance = account.balance.subtract(amount.toBigDecimal())
+                )
             )
-        )
+        }
     }
 
     override fun transfer(
@@ -46,12 +52,18 @@ class TransactionUseCase(
         accountOrigin: String,
         accountDestination: String
     ) {
-        amount.run {
-            withdraw(this, accountOrigin)
-            deposit(this, accountDestination)
+        val origin = validatedAccount(accountOrigin)
+        val destination = validatedAccount(accountDestination)
+        synchronized(origin) {
+            synchronized(destination) {
+                amount.run {
+                    withdraw(this, origin.accountNumber!!)
+                    deposit(this, destination.accountNumber!!)
+                }
+            }
         }
     }
 
-    private fun validatedAccount(accountNumber: String): Account? =
+    private fun validatedAccount(accountNumber: String): Account =
         accountOutputPort.getAccount(accountNumber)
 }

@@ -14,7 +14,7 @@ class AccountOutputAdapter(
         accountRepository.save(account)
     }
 
-    override fun getAccount(accountNumber: String): Account? =
+    override fun getAccount(accountNumber: String): Account =
         accountRepository.findByAccountNumber(accountNumber)
             ?: throw AccountNotFoundException("Conta não encontrada: $accountNumber")
 }
