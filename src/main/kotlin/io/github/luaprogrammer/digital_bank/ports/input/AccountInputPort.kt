@@ -8,6 +8,6 @@ interface AccountInputPort {
 
     fun createAccount(account: Account)
 
-    fun getAccount(accountNumber: String): Account
+    fun getAccount(accountNumber: String): Account?
 
 }

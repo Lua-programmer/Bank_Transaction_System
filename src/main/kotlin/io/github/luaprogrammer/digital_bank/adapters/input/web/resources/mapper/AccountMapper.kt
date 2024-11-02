@@ -10,7 +10,6 @@ import io.github.luaprogrammer.digital_bank.usecases.domain.Person
 fun AccountRequest.toAccount() =
     this.let {
         Account(
-            id = it.id,
             accountNumber = it.accountNumber,
             balance = it.balance!!,
             person = it.person.toPerson()
@@ -20,7 +19,6 @@ fun AccountRequest.toAccount() =
 fun PersonRequest.toPerson() =
     this.let {
         Person(
-            id = it.id,
             name = it.name,
             cpf = it.cpf,
             email = it.email

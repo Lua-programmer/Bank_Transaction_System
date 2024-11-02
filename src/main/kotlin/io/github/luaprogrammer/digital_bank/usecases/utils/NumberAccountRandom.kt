@@ -4,7 +4,6 @@ import kotlin.random.Random
 
 val generatedNumbers = mutableSetOf<String>()
 
-
 fun generateAccountNumber(): String {
     while (true) {
         val bank = Random.nextInt(1000, 9999)

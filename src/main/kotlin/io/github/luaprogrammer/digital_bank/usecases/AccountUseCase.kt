@@ -14,10 +14,9 @@ class AccountUseCase(
     override fun createAccount(account: Account) =
         account.run {
             this.accountNumber = generateAccountNumber()
-            accountOutputPort.createAndSaveAccount(this)
+            accountOutputPort.saveAccount(this)
         }
 
-    override fun getAccount(accountNumber: String): Account {
-        return accountOutputPort.getAccount(accountNumber)
-    }
+    override fun getAccount(accountNumber: String): Account? =
+        accountOutputPort.getAccount(accountNumber)
 }

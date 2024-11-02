@@ -8,7 +8,7 @@ data class Account(
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Int?,
+    val id: Int? = null,
 
     @Column
     var balance: BigDecimal,

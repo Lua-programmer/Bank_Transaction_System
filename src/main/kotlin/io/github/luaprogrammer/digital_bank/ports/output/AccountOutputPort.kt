@@ -6,8 +6,8 @@ import org.springframework.stereotype.Service
 @Service
 interface AccountOutputPort {
 
-    fun createAndSaveAccount(account: Account)
+    fun saveAccount(account: Account)
 
-    fun getAccount(accountNumber: String): Account
+    fun getAccount(accountNumber: String): Account?
 
 }
