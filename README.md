@@ -68,8 +68,8 @@ Com a ajuda do flyway, algumas contas já são adicionadas ao subir a aplicaçã
 [Sistema_Bancário.json](sistema_bancario.json)
 
 ##Implementações para PR:
-- [] Salvar transação de forma assíncrona usando o RabbitMQ, após cada ação de saque, depósito ou transferência. Atualmente está de forma síncrona.
-- [] Trazer transações passando o número da conta como parâmetro, usando paginação.
+- [ ] Salvar transação de forma assíncrona usando o RabbitMQ, após cada ação de saque, depósito ou transferência. Atualmente está de forma síncrona.
+- [ ] Trazer transações passando o número da conta como parâmetro, usando paginação.
 
 
 ## 🔗 Links
