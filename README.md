@@ -67,6 +67,11 @@ Ao clicar no link abaixo, você terá acesso a uma coleção montada para testar
 Com a ajuda do flyway, algumas contas já são adicionadas ao subir a aplicação local, facilitando nos testes, mas sugiro também criar novas contas e "brincar" com a funcionalidades da aplicação.
 [Sistema_Bancário.json](sistema_bancario.json)
 
+##Implementações para PR:
+- [] Salvar transação de forma assíncrona usando o RabbitMQ, após cada ação de saque, depósito ou transferência. Atualmente está de forma síncrona.
+- [] Trazer transações passando o número da conta como parâmetro, usando paginação.
+
+
 ## 🔗 Links
 [![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/luanamelissaprogrammer/)
 
