@@ -8,6 +8,8 @@ import io.github.luaprogrammer.digital_bank.usecases.domain.Account
 import io.github.luaprogrammer.digital_bank.usecases.domain.Transaction
 import io.github.luaprogrammer.digital_bank.usecases.domain.TransactionType
 import jakarta.transaction.Transactional
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
 
 @Service
@@ -16,11 +18,15 @@ class TransactionUseCase(
     private val transactionOutputPort: TransactionOutputPort
 ) : TransactionInputPort {
 
+    private val logger: Logger = LoggerFactory.getLogger(TransactionUseCase::class.java)
+
     @Transactional
     override fun deposit(
         amount: String,
         accountNumber: String
     ) {
+
+        logger.info("Validando conta...")
         val account = validatedAccount(accountNumber)
 
         synchronized(account) {
@@ -29,6 +35,7 @@ class TransactionUseCase(
                     balance = account.balance.add(amount.toBigDecimal())
                 )
             )
+            logger.info("Saldo atualizado com sucesso...")
 
             transactionOutputPort.saveTransaction(
                 Transaction(
@@ -37,6 +44,8 @@ class TransactionUseCase(
                     accountNumber = accountNumber
                 )
             )
+
+            logger.info("Depósito realizado com sucesso...")
         }
     }
 
@@ -45,7 +54,9 @@ class TransactionUseCase(
         amount: String,
         accountNumber: String
     ) {
+        logger.info("Validando conta...")
         val account = validatedAccount(accountNumber)
+
         synchronized(account) {
 
             if (account.balance < amount.toBigDecimal()) {
@@ -56,6 +67,8 @@ class TransactionUseCase(
                     balance = account.balance.subtract(amount.toBigDecimal())
                 )
             )
+            logger.info("Saldo atualizado com sucesso...")
+
             transactionOutputPort.saveTransaction(
                 Transaction(
                     type = TransactionType.W,
@@ -63,6 +76,7 @@ class TransactionUseCase(
                     accountNumber = accountNumber
                 )
             )
+            logger.info("Saque realizado com sucesso...")
         }
     }
 
@@ -71,8 +85,11 @@ class TransactionUseCase(
         accountOrigin: String,
         accountDestination: String
     ) {
+
+        logger.info("Validando contas...")
         val origin = validatedAccount(accountOrigin)
         val destination = validatedAccount(accountDestination)
+
         synchronized(origin) {
             synchronized(destination) {
                 amount.run {
@@ -90,6 +107,7 @@ class TransactionUseCase(
                 destination = accountDestination
             )
         )
+        logger.info("Transferência realizada com sucesso...")
     }
 
     override fun transactions(): List<Transaction> {

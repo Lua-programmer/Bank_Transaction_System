@@ -4,5 +4,6 @@ enum class TransactionType(name: String) {
     T("transfer"),
     D("deposit"),
     W("withdrawal");
+
     override fun toString(): String = name;
 }

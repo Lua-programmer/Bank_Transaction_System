@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service
 @Service
 class TransactionOutputPortAdapter(
     private val transactionRepository: TransactionRepository
-): TransactionOutputPort {
+) : TransactionOutputPort {
 
     override fun getTransactions(): List<Transaction> =
         transactionRepository.findAll().ifEmpty { listOf() }
