@@ -3,6 +3,7 @@ package io.github.luaprogrammer.digital_bank.usecases
 import io.github.luaprogrammer.digital_bank.adapters.output.exceptions.AccountNotFoundException
 import io.github.luaprogrammer.digital_bank.ports.exceptions.InsufficientBalanceException
 import io.github.luaprogrammer.digital_bank.ports.output.AccountOutputPort
+import io.github.luaprogrammer.digital_bank.ports.output.TransactionOutputPort
 import io.github.luaprogrammer.digital_bank.usecases.domain.Account
 import io.github.luaprogrammer.digital_bank.usecases.domain.Person
 import io.mockk.every
@@ -19,10 +20,11 @@ import kotlin.test.assertFailsWith
 class TransactionUseCaseTest {
     private lateinit var transactionUseCase: TransactionUseCase
     private val accountOutputPort: AccountOutputPort = mockk(relaxed = true)
+    private val transactionOutputPort: TransactionOutputPort = mockk(relaxed = true)
 
     @BeforeEach
     fun setUp() {
-        transactionUseCase = TransactionUseCase(accountOutputPort)
+        transactionUseCase = TransactionUseCase(accountOutputPort, transactionOutputPort)
 
         every {
             accountOutputPort.getAccount("123")
