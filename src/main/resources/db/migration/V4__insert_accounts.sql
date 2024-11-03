@@ -15,3 +15,9 @@ values (5, 0.00, '5773-3133-585332-5', 5);
 
 insert into account (id, balance, account_number, person_id)
 values (6, 0.00, '5773-3133-585332-6', 6);
+
+insert into account (id, balance, account_number, person_id)
+values (7, 0.00, '5773-3133-585332-7', 7);
+
+insert into account (id, balance, account_number, person_id)
+values (8, 0.00, '5773-3133-585332-8', 8);

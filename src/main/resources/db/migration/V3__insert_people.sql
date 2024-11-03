@@ -15,3 +15,9 @@ values (5, 'Caroline', '859.663.460-62', 'caroline@email.com');
 
 insert into person (id, name, cpf, email)
 values (6, 'Helena', '881.572.060-06', 'helena@email.com');
+
+insert into person (id, name, cpf, email)
+values (7, 'Matt', '298.553.390-29', 'matt@email.com');
+
+insert into person (id, name, cpf, email)
+values (8, 'Bonnie', '684.201.540-59', 'bonnie@email.com');
