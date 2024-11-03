@@ -65,7 +65,7 @@ Após o servidor iniciado você pode seguir a documentação utilizando o Postma
 
 Ao clicar no link abaixo, você terá acesso a uma coleção montada para testar concorrência de transações, bem como as funcionalidades de depósito, saque e transferência.
 Com a ajuda do flyway, algumas contas já são adicionadas ao subir a aplicação local, facilitando nos testes, mas sugiro também criar novas contas e "brincar" com a funcionalidades da aplicação.
-[Sistema_Bancário.json](sistema|_bancario.json)
+[Sistema_Bancário.json](sistema_bancario.json)
 
 ## 🔗 Links
 [![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/luanamelissaprogrammer/)

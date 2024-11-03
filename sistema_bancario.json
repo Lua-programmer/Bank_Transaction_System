@@ -1,0 +1,408 @@
+{
+	"info": {
+		"_postman_id": "3c893427-07a2-428a-bad2-96e3d2404ce3",
+		"name": "Tabela Verdade",
+		"description": "Documentação para teste de contas",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17399592",
+		"_collection_link": "https://www.postman.com/red-robot-505129/workspace/sistema-bancrio/collection/17399592-3c893427-07a2-428a-bad2-96e3d2404ce3?action=share&source=collection_link&creator=17399592"
+	},
+	"item": [
+		{
+			"name": "Criação de conta",
+			"item": [
+				{
+					"name": "Criar conta",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{   \n    \"person\": {\n        \"name\": \"Alice Green\",\n        \"cpf\": \"155.000.390-91\",\n        \"email\": \"alice@email.com\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/bank-digital/v1/account/create",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"bank-digital",
+								"v1",
+								"account",
+								"create"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Cria conta associada a uma pessoa."
+		},
+		{
+			"name": "Depósito",
+			"item": [
+				{
+					"name": "Depósito",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"amount\": \"100.0\",\n    \"accountNumber\": \"5773-3133-585332-7\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/bank-digital/v1/transactions/deposit",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"bank-digital",
+								"v1",
+								"transactions",
+								"deposit"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Conta: 5773-3133-585332-7, Valor: R$100\n\nSaldo da Conta 5773-3133-585332-7: R$100"
+		},
+		{
+			"name": "Saque",
+			"item": [
+				{
+					"name": "Saque",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"amount\": \"50.00\",\n    \"accountNumber\": \"5773-3133-585332-7\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/bank-digital/v1/transactions/withdraw",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"bank-digital",
+								"v1",
+								"transactions",
+								"withdraw"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Conta: 5773-3133-585332-7, Valor: R$50\n\nSaldo da Conta 5773-3133-585332-7: R$50"
+		},
+		{
+			"name": "Transferência",
+			"item": [
+				{
+					"name": "Transferência",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"amount\": \"30.00\",\n    \"accountOrigin\": \"5773-3133-585332-7\",\n    \"accountDestination\": \"5773-3133-585332-8\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/bank-digital/v1/transactions/transfer",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"bank-digital",
+								"v1",
+								"transactions",
+								"transfer"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "De: 5773-3133-585332-7, Para: 5773-3133-585332-8, Valor: R$ 30\n\nSaldo da Conta 5773-3133-585332-7: R$20  \nSaldo da Conta 5773-3133-585332-8: R$30"
+		},
+		{
+			"name": "Primeira concorrência",
+			"item": [
+				{
+					"name": "Depósito",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"amount\": \"50.0\",\n    \"accountNumber\": \"5773-3133-585332-1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/bank-digital/v1/transactions/deposit",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"bank-digital",
+								"v1",
+								"transactions",
+								"deposit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Saque",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"amount\": \"30.00\",\n    \"accountNumber\": \"5773-3133-585332-1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/bank-digital/v1/transactions/withdraw",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"bank-digital",
+								"v1",
+								"transactions",
+								"withdraw"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Conta",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/bank-digital/v1/account/find?accountNumber=5773-3133-585332-1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"bank-digital",
+								"v1",
+								"account",
+								"find"
+							],
+							"query": [
+								{
+									"key": "accountNumber",
+									"value": "5773-3133-585332-1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Depósito(Conta: 5773-3133-585332-1, Valor: R$ 50)  \nSaque(Conta: 5773-3133-585332-1, Valor: R$ 30)\n\nSaldo da Conta 5773-3133-585332-1: Valor: R$ 20"
+		},
+		{
+			"name": "Segunda concorrência",
+			"item": [
+				{
+					"name": "Depósito",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"amount\": \"100.0\",\n    \"accountNumber\": \"5773-3133-585332-2\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/bank-digital/v1/transactions/deposit",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"bank-digital",
+								"v1",
+								"transactions",
+								"deposit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Transferência",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"amount\": \"50.00\",\n    \"accountOrigin\": \"5773-3133-585332-2\",\n    \"accountDestination\": \"5773-3133-585332-3\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/bank-digital/v1/transactions/transfer",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"bank-digital",
+								"v1",
+								"transactions",
+								"transfer"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Depósito(Conta: 5773-3133-585332-2, Valor: R$100)  \nTransferência(De: 5773-3133-585332-2, Para: 5773-3133-585332-7, Valor: R$50)\n\nSaldo da Conta 5773-3133-585332-2: 50  \nSaldo da Conta 5773-3133-585332-3: 50"
+		},
+		{
+			"name": "Terceira Concorrência",
+			"item": [
+				{
+					"name": "Transferência",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"amount\": \"20.00\",\n    \"accountOrigin\": \"5773-3133-585332-4\",\n    \"accountDestination\": \"5773-3133-585332-5\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/bank-digital/v1/transactions/transfer",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"bank-digital",
+								"v1",
+								"transactions",
+								"transfer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Transferência",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"amount\": \"10.00\",\n    \"accountOrigin\": \"5773-3133-585332-5\",\n    \"accountDestination\": \"5773-3133-585332-6\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/bank-digital/v1/transactions/transfer",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"bank-digital",
+								"v1",
+								"transactions",
+								"transfer"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Transferência(De: 5773-3133-585332-4, Para: 5773-3133-585332-5, Valor: R$ 20)  \nTransferência(De: 5773-3133-585332-5, Para: 5773-3133-585332-6, Valor: R$10)\n\nSaldo da Conta 5773-3133-585332-4: R$80  \nSaldo da Conta 5773-3133-585332-5: R$10  \nSaldo da Conta 5773-3133-585332-6: R$10"
+		},
+		{
+			"name": "Conferindo Tabela Verdade",
+			"item": [
+				{
+					"name": "transações",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/bank-digital/v1/transactions/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"bank-digital",
+								"v1",
+								"transactions",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Confere tabela verdade\n\nReturn:"
+		}
+	]
+}
