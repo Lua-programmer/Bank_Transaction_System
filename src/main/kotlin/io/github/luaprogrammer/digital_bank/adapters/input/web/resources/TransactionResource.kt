@@ -1,14 +1,13 @@
 package io.github.luaprogrammer.digital_bank.adapters.input.web.resources
 
 import io.github.luaprogrammer.digital_bank.adapters.input.web.resources.constants.TRANSACTION_RESOURCE_V1_URI
+import io.github.luaprogrammer.digital_bank.adapters.input.web.resources.mapper.toTransactionsResponse
 import io.github.luaprogrammer.digital_bank.adapters.input.web.resources.request.AmountRequest
 import io.github.luaprogrammer.digital_bank.adapters.input.web.resources.request.TransferRequest
+import io.github.luaprogrammer.digital_bank.adapters.input.web.resources.response.TransactionsResponse
 import io.github.luaprogrammer.digital_bank.ports.input.TransactionInputPort
 import jakarta.validation.Valid
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping(TRANSACTION_RESOURCE_V1_URI)
@@ -46,4 +45,8 @@ class TransactionResource(
             request.accountDestination
         )
     }
+
+    @GetMapping
+    fun transactions(): TransactionsResponse =
+        transactionInputPort.transactions().toTransactionsResponse()
 }
