@@ -23,15 +23,25 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.springframework.boot:spring-boot-starter-validation")
-	implementation("com.mysql:mysql-connector-j")
-	implementation("org.flywaydb:flyway-core")
-	implementation("org.flywaydb:flyway-mysql")
+
+//	FLYWAY AND ORACLE
+	implementation("com.oracle.database.jdbc:ojdbc8:21.9.0.0")
+	implementation("org.flywaydb:flyway-database-oracle")
+
+//	FLYWAY AND MYSQL
+//	implementation("com.mysql:mysql-connector-j")
+//	implementation("org.flywaydb:flyway-core")
+//	implementation("org.flywaydb:flyway-mysql")
+
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.slf4j:slf4j-api:2.0.0")
+
 	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.4")
 	implementation("org.springdoc:springdoc-openapi-starter-webmvc-api:2.0.4")
+
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
+
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
 	testImplementation("io.mockk:mockk:1.13.3")
