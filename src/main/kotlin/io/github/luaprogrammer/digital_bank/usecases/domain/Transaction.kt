@@ -3,7 +3,7 @@ package io.github.luaprogrammer.digital_bank.usecases.domain
 import jakarta.persistence.*
 import java.math.BigDecimal
 
-@Entity(name ="transaction")
+@Entity(name ="account_transaction")
 data class Transaction (
 
     @Id
