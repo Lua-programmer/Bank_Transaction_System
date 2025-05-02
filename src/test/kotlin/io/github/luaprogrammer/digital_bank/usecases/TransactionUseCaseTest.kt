@@ -160,7 +160,6 @@ class TransactionUseCaseTest {
 
         assertFailsWith<AccountNotFoundException>("Account not found") {
             transactionUseCase.withdraw("50.00", "999")
-
         }
     }
 }

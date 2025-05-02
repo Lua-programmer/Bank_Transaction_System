@@ -4,11 +4,13 @@ import io.github.luaprogrammer.digital_bank.adapters.input.web.resources.constan
 import io.github.luaprogrammer.digital_bank.adapters.input.web.resources.mapper.toAccount
 import io.github.luaprogrammer.digital_bank.adapters.input.web.resources.mapper.toAccountResponse
 import io.github.luaprogrammer.digital_bank.adapters.input.web.resources.request.AccountRequest
+import io.github.luaprogrammer.digital_bank.adapters.input.web.resources.response.AccountResponse
 import io.github.luaprogrammer.digital_bank.ports.input.AccountInputPort
 import jakarta.validation.Valid
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus
+import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
 @RestController
@@ -35,9 +37,10 @@ class AccountResource(
     @GetMapping("find")
     fun getAccount(
         @RequestParam accountNumber: String
-    ) {
+    ): ResponseEntity<AccountResponse> {
         logger.info("Buscando conta com número $accountNumber... ")
-        accountInputPort.getAccount(accountNumber)!!.toAccountResponse()
+        val accountResponse = accountInputPort.getAccount(accountNumber)!!.toAccountResponse()
+        return ResponseEntity.ok(accountResponse)
         logger.info("Conta encontrada com sucesso... ")
     }
 

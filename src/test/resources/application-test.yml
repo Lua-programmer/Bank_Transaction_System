@@ -1,0 +1,39 @@
+spring:
+  name: digital-bank
+
+  datasource:
+    url: jdbc:oracle:thin:@localhost:1521/XE
+    username: dev_user_test
+    password: dev_pass_test
+    driver-class-name: oracle.jdbc.OracleDriver
+
+  jpa:
+    open-in-view: false
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+    hibernate:
+      ddl-auto: none
+
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+
+  main:
+    banner-mode: off
+    output:
+      ansi:
+        enabled: ALWAYS
+    jackson:
+      default-property-inclusion: non_null
+    mvc:
+      pathmatch:
+        matching-strategy: ant_path_matcher
+
+  logging:
+    level:
+      root: INFO
+      io.github.luaprogrammer.digital_bank: DEBUG
+    pattern:
+      console: "%d{yyyy-MM-dd HH:mm:ss} - [%thread] %-5level %logger{36} - %msg%n"
