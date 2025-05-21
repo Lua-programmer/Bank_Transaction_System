@@ -44,6 +44,8 @@ dependencies {
         exclude(group = "org.testcontainers.shaded", module = "jackson-databind")
     }
 
+    runtimeOnly("com.oracle.database.jdbc:ojdbc11:21.9.0.0")
+
     developmentOnly("org.springframework.boot:spring-boot-devtools")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
