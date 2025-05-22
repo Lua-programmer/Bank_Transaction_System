@@ -37,3 +37,20 @@ spring:
       io.github.luaprogrammer.digital_bank: DEBUG
     pattern:
       console: "%d{yyyy-MM-dd HH:mm:ss} - [%thread] %-5level %logger{36} - %msg%n"
+
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: digital-bank-api
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: "*"
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+#      retries: 2
+#      acks: all
+#      properties:
+#        max.in.flight.requests.per.connection: 1

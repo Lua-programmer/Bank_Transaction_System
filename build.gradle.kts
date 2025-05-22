@@ -40,6 +40,9 @@ dependencies {
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.4")
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-api:2.0.4")
 
+//    Apache kafka
+    implementation("org.springframework.kafka:spring-kafka")
+
     implementation("org.testcontainers:testcontainers:1.19.3") {
         exclude(group = "org.testcontainers.shaded", module = "jackson-databind")
     }

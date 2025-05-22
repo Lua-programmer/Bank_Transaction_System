@@ -1,6 +1,6 @@
 package io.github.luaprogrammer.digital_bank.usecases
 
-import io.github.luaprogrammer.digital_bank.ports.input.AccountInputPort
+import io.github.luaprogrammer.digital_bank.ports.input.CreateAccountInputPort
 import io.github.luaprogrammer.digital_bank.ports.output.AccountOutputPort
 import io.github.luaprogrammer.digital_bank.usecases.domain.Account
 import io.github.luaprogrammer.digital_bank.usecases.utils.generateAccountNumber
@@ -9,11 +9,11 @@ import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
 
 @Service
-class AccountUseCase(
+class CreateAccountUseCase(
     private val accountOutputPort: AccountOutputPort
-) : AccountInputPort {
+) : CreateAccountInputPort {
 
-    private val logger: Logger = LoggerFactory.getLogger(AccountUseCase::class.java)
+    private val logger: Logger = LoggerFactory.getLogger(CreateAccountUseCase::class.java)
 
     override fun createAccount(account: Account) =
         account.run {
@@ -21,7 +21,4 @@ class AccountUseCase(
             this.accountNumber = generateAccountNumber()
             accountOutputPort.saveAccount(this)
         }
-
-    override fun getAccount(accountNumber: String): Account? =
-        accountOutputPort.getAccount(accountNumber)
 }
