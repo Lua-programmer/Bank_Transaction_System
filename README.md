@@ -24,6 +24,8 @@ Esta API permite:
 
 ## Rodando Local
 
+🚨Atenção: Para seguir os comandos abaixo é necessário excluir o arquivo "application-oracle.yml" e a "V6" na pasta de migrations.
+
 Clone o projeto
 
 ```bash
@@ -53,7 +55,6 @@ Acessando o banco de dados com o Dbeaver
     usuário: root
     senha: root_password
 ```
-
 Após o servidor iniciado você pode seguir a documentação utilizando o Postman para fazer as requisições ou utilizar a linha de comando.
 
 ## Documentação
@@ -68,7 +69,7 @@ Com a ajuda do flyway, algumas contas já são adicionadas ao subir a aplicaçã
 [Sistema_Bancário.json](sistema_bancario.json)
 
 ## Implementações para PR:
-- [x] Criar conta de forma assíncrona usando o Apache Kafka.
+✅ Criar conta de forma assíncrona usando o Apache Kafka.
 - [ ] Salvar transação de forma assíncrona usando o Apache Kafka, após cada ação de saque, depósito ou transferência. Atualmente está de forma síncrona.
 - [ ] Trazer transações passando o número da conta como parâmetro, usando paginação.
 
